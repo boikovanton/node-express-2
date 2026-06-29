@@ -44,6 +44,8 @@ function requireAdmin(req, res, next) {
  *
  **/
 
+// FIXES BUG #4: Verify JWT signature instead of simply decoding it.
+
 function authUser(req, res, next) {
   try {
     const token = req.body._token || req.query._token;

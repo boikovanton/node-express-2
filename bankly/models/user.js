@@ -79,6 +79,8 @@ class User {
  *
  * */
 
+  // FIXES BUG #3: Return only basic user information.
+
   static async getAll() {
     const result = await db.query(
       `SELECT username,
@@ -135,6 +137,8 @@ class User {
 
     const result = await db.query(query, values);
     const user = result.rows[0];
+
+    // FIXES BUG #2: Throw 404 if user does not exist.
 
     if (!user) {
       throw new ExpressError('No such user', 404);

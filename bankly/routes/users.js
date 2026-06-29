@@ -59,6 +59,8 @@ router.get('/:username', authUser, requireLogin, async function(req, res, next) 
  *
  */
 
+// FIXES BUG #5: Allow either the user or an admin to update the account.
+
 router.patch('/:username', authUser, requireLogin, async function(req, res, next) {
   try {
     if (!req.curr_admin && req.curr_username !== req.params.username) {
@@ -92,6 +94,8 @@ router.patch('/:username', authUser, requireLogin, async function(req, res, next
  *
  * If user cannot be found, return a 404 err.
  */
+
+// FIXES BUG #6: Wait for delete operation before responding.
 
 router.delete('/:username', authUser, requireAdmin, async function(req, res, next) {
   try {
