@@ -161,7 +161,7 @@ describe("PATCH /users/[username]", function() {
     const response = await request(app)
       .patch("/users/u1")
       .send({ _token: tokens.u1, admin: true });
-    expect(response.statusCode).toBe(401);
+    expect(response.statusCode).toBe(400);
   });
 
   test("should return 404 if cannot find", async function() {
@@ -198,6 +198,6 @@ afterEach(async function() {
   await db.query("DELETE FROM users");
 });
 
-afterAll(function() {
-  db.end();
+afterAll(async function() {
+  await db.end();
 });
